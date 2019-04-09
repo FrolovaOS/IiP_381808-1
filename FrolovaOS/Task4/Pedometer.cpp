@@ -20,10 +20,6 @@ Pedometer::Pedometer()
 
 }
 
-void Pedometer::SetSize(int _size)
-{
-	size = _size;
-}
 Pedometer::Pedometer(int _size, int _day, int _month, int _year, int _hour, int _min)
 {
 
@@ -115,8 +111,39 @@ void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int 
 	}
 	else
 	{
+		
+		int* year_copy;
+		int* month_copy;
+		int* day_copy;
+		int* hour1_copy;
+		int* min1_copy;
+		int* hour2_copy;
+		int* min2_copy;
+		int* step_copy;
+		
+		year_copy = new int[size];
+		month_copy = new int[size];
+		day_copy = new int[size];
+		hour1_copy = new int[size];
+		min1_copy = new int[size];
+		hour2_copy = new int[size];
+		min2_copy = new int[size];
+		step_copy = new int[size];
+
+		for (int i = 0; i < leng; i++)
+		{
+			year_copy[i] = year[i];
+			month_copy[i] = month[i];
+			day_copy[i] = day[i];
+			hour1_copy[i] = hour1[i];
+			min1_copy[i] = min1[i];
+			hour2_copy[i] = hour2[i];
+			min2_copy[i] = min2[i];
+			step_copy[i] = step[i];
+		}
+
 		size++;
-		step = new int[size];
+
 		year = new int[size];
 		month = new int[size];
 		day = new int[size];
@@ -125,6 +152,27 @@ void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int 
 		hour2 = new int[size];
 		min2 = new int[size];
 		step = new int[size];
+
+		for (int i = 0;i < leng; i++)
+		{
+			year[i] = year_copy[i];
+			month[i] = month_copy[i];
+			day[i] = day_copy[i];
+			hour1[i] = hour1_copy[i];
+			min1[i] = min1_copy[i];
+			hour2[i] = hour2_copy[i];
+			min2[i] = min2_copy[i];
+			step[i] = step_copy[i];
+		}
+
+		delete[] year_copy;
+		delete[] month_copy;
+		delete[] day_copy;
+		delete[] hour1_copy;
+		delete[] min1_copy;
+		delete[] hour2_copy;
+		delete[] min2_copy;
+		delete[] step_copy;
 
 		year[leng] = _year;
 		month[leng] = _month;
