@@ -90,9 +90,11 @@ int main()
 	os.open("Pedomet.txt");
 	os << A << endl;
 	os.close();
+	cout << A;
 	ifstream is;
 	is.open("Pedomet.txt");
 	is >> B;
+	cout << B;
 	is.close();
 
 }
