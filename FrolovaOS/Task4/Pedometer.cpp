@@ -279,15 +279,13 @@ ostream& operator<<(ostream & stream, const Pedometer &c)
 
 istream& operator>>(istream& stream, Pedometer& c)
 {
+	
 	int leng, size;
 	stream >> leng >> size;
 	int year_st, month_st, day_st, hour_st, min_st;
-	stream >> day_st >> month_st >> year_st >> hour_st >> min_st;
-	c.year_start = year_st;
-	c.month_start = month_st;
-	c.day_start = day_st;
-	c.hour_start = hour_st;
-	c.min_start = min_st;
+	stream >> c.day_start >> c.month_start >> c.year_start >> c.hour_start >> c.min_start;
+
+
 	if ((c.size < size) || (c.size > size))
 	{
 
@@ -299,7 +297,8 @@ istream& operator>>(istream& stream, Pedometer& c)
 		delete[] c.hour2;
 		delete[] c.min2;
 		delete[] c.step;
-		
+	
+		c.size = size;
 		c.year = new int[size];
 		c.month = new int[size];
 		c.day = new int[size];
@@ -308,13 +307,26 @@ istream& operator>>(istream& stream, Pedometer& c)
 		c.min1 = new int[size];
 		c.hour2 = new int[size];
 		c.min2 = new int[size];
-
 		c.step = new int[size];
 
+		c.leng = leng;
 		
+		for (int i = 0; i < c.leng; i++)
+		{
+			stream >> c.day[i];
+			stream >> c.month[i];
+			stream >> c.year[i];
+			stream >> c.hour1[i];
+			stream >> c.min1[i];
+			stream >> c.hour2[i];
+			stream >> c.min2[i];
+			stream >> c.step[i];
+		}
 	}
-	c.leng = leng;
-	c.size = size;
+	else if (c.size == size)
+	{
+		if (c.leng == leng)
+		{
 			for (int i = 0; i < c.leng; i++)
 			{
 				stream >> c.day[i];
@@ -326,5 +338,48 @@ istream& operator>>(istream& stream, Pedometer& c)
 				stream >> c.min2[i];
 				stream >> c.step[i];
 			}
-			return stream;
+		}
+		else
+		{
+			
+			delete[] c.year;
+			delete[] c.month;
+			delete[] c.day;
+			delete[] c.hour1;
+			delete[] c.min1;
+			delete[] c.hour2;
+			delete[] c.min2;
+			delete[] c.step;
+
+			c.year = new int[size];
+			c.month = new int[size];
+			c.day = new int[size];
+
+			c.hour1 = new int[size];
+			c.min1 = new int[size];
+			c.hour2 = new int[size];
+			c.min2 = new int[size];
+			c.step = new int[size];
+
+			c.leng = leng;
+
+			 for (int i = 0; i < c.leng; i++)
+			 {
+				 stream >> c.day[i];
+				 stream >> c.month[i];
+				 stream >> c.year[i];
+				 stream >> c.hour1[i];
+				 stream >> c.min1[i];
+				 stream >> c.hour2[i];
+				 stream >> c.min2[i];
+				 stream >> c.step[i];
+			 }
+
+		}
+	}
+	
+	
+	
+	
+	return stream;
 }
