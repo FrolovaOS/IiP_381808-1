@@ -23,14 +23,13 @@ private:
 
 public:
 	//constructors
-	Pedometer();//po umolchaniu
 	//inicializators
-	Pedometer(int _size, int _day, int _month, int _year, int _hour, int _min);
+	Pedometer(int _size, int _day, int _month, int _year, int _hour, int _min);//start date
 	//Destructor
 	~Pedometer();
-	void newObservation(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2, int _step);
+	void newObservation(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2, int _step);//adding observation
 	
-	void GetStartDate();
+	void GetStartDate();//getting start date 
 	int GetInf(int year, int month, int day, int hour1, int min1, int hour2, int min2);//count of step
 	int AveregeStepsMonth(int month);//average steps per month
 	int AveregeStepsAllTime();//average steps at all time

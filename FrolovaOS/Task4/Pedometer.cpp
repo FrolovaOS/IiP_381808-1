@@ -4,23 +4,9 @@
 #include "Pedometer.h"
 using namespace std;
 
-Pedometer::Pedometer()
-{
-	step = NULL;
-	year = NULL;
-	month = NULL;
-	day = NULL;
-	hour1 = NULL;
-	min1 = NULL;
-	hour2 = NULL;
-	min2 = NULL;
-	size = 0;
-	leng = 0;
-	year = month = day = hour1 = min1 = 0;
 
-}
 
-Pedometer::Pedometer(int _size, int _day, int _month, int _year, int _hour, int _min)
+Pedometer::Pedometer(int _size, int _day, int _month, int _year, int _hour, int _min)//start date
 {
 
 	leng = 0;
@@ -42,7 +28,8 @@ Pedometer::Pedometer(int _size, int _day, int _month, int _year, int _hour, int 
 
 }
 
-Pedometer::~Pedometer() {
+Pedometer::~Pedometer() //Destructor
+{
 	leng = 0;
 	size = 0;
 	year_start = 0;
@@ -88,11 +75,11 @@ Pedometer::~Pedometer() {
 	}
 }
 
-void Pedometer::GetStartDate()
+void Pedometer::GetStartDate()//getting start date 
 {
 	cout << "The date of begining : " << day_start << "." << month_start << "." << year_start << ". The time is " << hour_start << ":" << min_start << endl;
 }
-void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2, int _step)
+void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2, int _step)//adding observation
 {
 
 	if (leng < size)
@@ -187,7 +174,7 @@ void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int 
 	}
 }
 
-int Pedometer::GetInf(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2)
+int Pedometer::GetInf(int _day, int _month, int _year, int _hour1, int _min1, int _hour2, int _min2)//getting start date 
 {
 
 	for (int i = 0; i <= leng; i++)
@@ -203,7 +190,8 @@ int Pedometer::GetInf(int _day, int _month, int _year, int _hour1, int _min1, in
 	}
 
 }
-int Pedometer::AveregeStepsMonth(int _month) {
+int Pedometer::AveregeStepsMonth(int _month) //average steps per month
+{
 	int Steps = 0;
 	int num = 0;
 	for (int i = 0; i <= leng; i++)
@@ -214,7 +202,8 @@ int Pedometer::AveregeStepsMonth(int _month) {
 		}
 	return Steps / num;
 }
-int Pedometer::AveregeStepsAllTime() {
+int Pedometer::AveregeStepsAllTime()//average steps at all time
+{
 	int Steps = 0;
 	for (int i = 0; i < leng; i++) {
 		Steps += step[i];
@@ -222,7 +211,7 @@ int Pedometer::AveregeStepsAllTime() {
 	return Steps / leng;
 }
 
-int Pedometer::MaxStepsMonth(int Month, int Day)
+int Pedometer::MaxStepsMonth(int Month, int Day)//max steps per month
 {
 	int Steps = 0;
 	for (int i = 0; i <= leng; i++)
@@ -232,7 +221,8 @@ int Pedometer::MaxStepsMonth(int Month, int Day)
 		}
 	return Steps;
 }
-int Pedometer::DateMaxStepsMonth(int _month) {
+int Pedometer::DateMaxStepsMonth(int _month)//the month when the maximum number of steps was reached
+{
 	int num;
 	int Steps = 0;
 	for (int i = 0; i <= leng; i++)
@@ -244,7 +234,8 @@ int Pedometer::DateMaxStepsMonth(int _month) {
 	return num;
 
 }
-int Pedometer::MaxStepsAllTime() {
+int Pedometer::MaxStepsAllTime()//max steps at all time
+{
 	int Steps = 0;
 	for (int i = 0; i <= leng; i++)
 		if (step[i] > Steps)
@@ -254,7 +245,8 @@ int Pedometer::MaxStepsAllTime() {
 	return Steps;
 }
 //дата
-void Pedometer::DateMaxSteps(int &d, int&m, int&y) {
+void Pedometer::DateMaxSteps(int &d, int&m, int&y) //the date when the maximum number of steps was reached
+{
 	int Steps = 0;
 	for (int i = 0; i <= leng; i++)
 		if (step[i] > Steps)
@@ -266,7 +258,8 @@ void Pedometer::DateMaxSteps(int &d, int&m, int&y) {
 		}
 }
 
-ostream& operator<<(ostream & stream, const Pedometer &c) {
+ostream& operator<<(ostream & stream, const Pedometer &c)
+{
 	stream << c.leng << " " << c.size << " " << c.day_start << " " << c.month_start << " " << c.year_start << " " << c.hour_start << " " << c.min_start << " ";
 	for (int i = 0; i < c.leng; i++)
 	{
@@ -283,11 +276,21 @@ ostream& operator<<(ostream & stream, const Pedometer &c) {
 	stream << endl;
 	return stream;
 }
+
 istream& operator>>(istream& stream, Pedometer& c)
 {
 	int leng, size;
 	stream >> leng >> size;
-	if (c.size < size) {
+	int year_st, month_st, day_st, hour_st, min_st;
+	stream >> day_st >> month_st >> year_st >> hour_st >> min_st;
+	c.year_start = year_st;
+	c.month_start = month_st;
+	c.day_start = day_st;
+	c.hour_start = hour_st;
+	c.min_start = min_st;
+	if ((c.size < size) || (c.size > size))
+	{
+
 		delete[] c.year;
 		delete[] c.month;
 		delete[] c.day;
@@ -296,35 +299,32 @@ istream& operator>>(istream& stream, Pedometer& c)
 		delete[] c.hour2;
 		delete[] c.min2;
 		delete[] c.step;
-	
+		
+		c.year = new int[size];
+		c.month = new int[size];
+		c.day = new int[size];
+
+		c.hour1 = new int[size];
+		c.min1 = new int[size];
+		c.hour2 = new int[size];
+		c.min2 = new int[size];
+
+		c.step = new int[size];
+
+		
 	}
 	c.leng = leng;
 	c.size = size;
-	c.year = new int[size];
-	c.month = new int[size];
-	c.day = new int[size];
-
-	c.hour1 = new int[size];
-	c.min1 = new int[size];
-	c.hour2 = new int[size];
-	c.min2 = new int[size];
-	c.step = new int[size];
-	int year_st, month_st, day_st, hour_st, min_st;
-	stream  >> day_st>> month_st>>year_st  >> hour_st >> min_st;
-	c.year_start = year_st;
-	c.month_start = month_st;
-	c.day_start = day_st;
-	c.hour_start = hour_st;
-	c.min_start = min_st;
-	for (int i = 0; i <= c.leng; i++) {
-		stream >> c.day[i];
-		stream >> c.month[i];
-		stream >> c.year[i];
-		stream >> c.hour1[i];
-		stream >> c.min1[i];
-		stream >> c.hour2[i];
-		stream >> c.min2[i];
-		stream >> c.step[i];
-	}
-	return stream;
+			for (int i = 0; i < c.leng; i++)
+			{
+				stream >> c.day[i];
+				stream >> c.month[i];
+				stream >> c.year[i];
+				stream >> c.hour1[i];
+				stream >> c.min1[i];
+				stream >> c.hour2[i];
+				stream >> c.min2[i];
+				stream >> c.step[i];
+			}
+			return stream;
 }
