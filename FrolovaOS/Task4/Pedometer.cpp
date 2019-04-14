@@ -107,7 +107,7 @@ void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int 
 		int* hour2_copy;
 		int* min2_copy;
 		int* step_copy;
-		
+		size++;
 		year_copy = new int[size];
 		month_copy = new int[size];
 		day_copy = new int[size];
@@ -129,47 +129,37 @@ void Pedometer::newObservation(int _day, int _month, int _year, int _hour1, int 
 			step_copy[i] = step[i];
 		}
 
-		size++;
-
-		year = new int[size];
-		month = new int[size];
-		day = new int[size];
-		hour1 = new int[size];
-		min1 = new int[size];
-		hour2 = new int[size];
-		min2 = new int[size];
-		step = new int[size];
-
-		for (int i = 0;i < leng; i++)
-		{
-			year[i] = year_copy[i];
-			month[i] = month_copy[i];
-			day[i] = day_copy[i];
-			hour1[i] = hour1_copy[i];
-			min1[i] = min1_copy[i];
-			hour2[i] = hour2_copy[i];
-			min2[i] = min2_copy[i];
-			step[i] = step_copy[i];
-		}
-
-		delete[] year_copy;
-		delete[] month_copy;
-		delete[] day_copy;
-		delete[] hour1_copy;
-		delete[] min1_copy;
-		delete[] hour2_copy;
-		delete[] min2_copy;
-		delete[] step_copy;
-
-		year[leng] = _year;
-		month[leng] = _month;
-		day[leng] = _day;
-		hour1[leng] = _hour1;
-		min1[leng] = _min1;
-		hour2[leng] = _hour2;
-		min2[leng] = _min2;
-		step[leng] = _step;
+		year_copy[leng] = _year;
+		month_copy[leng] = _month;
+		day_copy[leng] = _day;
+		hour1_copy[leng] = _hour1;
+		min1_copy[leng] = _min1;
+		hour2_copy[leng] = _hour2;
+		min2_copy[leng] = _min2;
+		step_copy[leng] = _step;
 		leng++;
+		
+		delete[] year;
+		delete[] month;
+		delete[] day;
+		delete[] hour1;
+		delete[] min1;
+		delete[] hour2;
+		delete[] min2;
+		delete[] step; 
+
+		year = year_copy;
+		month = month_copy;
+		day = day_copy;
+		hour1 = hour1_copy;
+		min1 = min1_copy;
+		hour2 = hour2_copy;
+		min2 = min2_copy;
+		step = step_copy;
+	
+	
+		
+
 
 	}
 }
@@ -282,7 +272,6 @@ istream& operator>>(istream& stream, Pedometer& c)
 	
 	int leng, size;
 	stream >> leng >> size;
-	int year_st, month_st, day_st, hour_st, min_st;
 	stream >> c.day_start >> c.month_start >> c.year_start >> c.hour_start >> c.min_start;
 
 
