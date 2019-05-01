@@ -3,6 +3,10 @@
 
 Bankomat::Bankomat()
 {
+	ifstream is;
+	is.open(prc->GetFileName());
+	is>> *prc;
+	is.close();
 	for (int i = 0; i < 6; i++)
 	{
 		denominationCount[i] = 1600;
@@ -53,8 +57,11 @@ int Bankomat::GetMoney(int Money)
 	while (Money >= 200) { denominationCount[2]--; Money = Money - 200; }
 	while (Money >= 100) { denominationCount[1]--; Money = Money - 100; }
 
-	prc->ChangeDate(Client.CardNumber, Client.ClientSum, "D:/учебники/2 семестр/лабы/Task5/Bankomat/Debug/ProcCenter.txt");
-
+	prc->ChangeDate(Client.CardNumber, Client.ClientSum);
+	ofstream os;
+	os.open(prc->GetFileName());
+	os << *prc;
+	os.close();
 }
 
 int Bankomat::DepositMoney(int Money)
@@ -78,7 +85,13 @@ int Bankomat::DepositMoney(int Money)
 	while ((denominationCount[1] < MaxDenominationCount) && (Money >= 100)) { denominationCount[1]++; Money = Money - 100; }
 
 
-	prc->ChangeDate(Client.CardNumber, Client.ClientSum, "D:/учебники/2 семестр/лабы/Task5/Bankomat/Debug/ProcCenter.txt");
+	prc->ChangeDate(Client.CardNumber, Client.ClientSum);
+	
+	ofstream os;
+	os.open(prc->GetFileName());
+	os<< *prc;
+	os.close();
+
 }
 
 void Bankomat::ReturnCard()

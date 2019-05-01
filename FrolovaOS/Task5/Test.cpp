@@ -13,8 +13,10 @@ int main()
 	setlocale(LC_ALL, "Russian");
 
 	Bankomat A;
-
-	if (A.getCard(2) == false)
+	cout << "Enter the number of card" << endl;
+	int numberCard;
+	cin >> numberCard;
+	if (A.getCard(numberCard) == false)
 	{
 		cout << "Card not found." << endl;
 		A.ReturnCard();

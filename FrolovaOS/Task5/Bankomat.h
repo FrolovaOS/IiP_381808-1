@@ -39,7 +39,7 @@ public:
 	int DepositMoney(int Money);
 	void ReturnCard();
 
-	ProcCenter *prc = new ProcCenter("D:/учебники/2 семестр/лабы/Task5/Bankomat/Debug/ProcCenter.txt");
+	ProcCenter *prc = new ProcCenter("C:/Users/Ol/Desktop/FrolovaOS/IiP_381808-1/FrolovaOS/Task5/x64/Debug/ProcCenter.txt");
 
 
 };
