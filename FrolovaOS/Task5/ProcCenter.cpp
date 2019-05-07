@@ -6,9 +6,8 @@
 ProcCenter::ProcCenter(string _fileName)
 {
 	fileName = _fileName;
-	
-	
 }
+
 bool ProcCenter::ClientFind(string &name1, string &surname1, string &patronymic1, int &ClientSum1, int &ClientPin1, bool &CardBlock1, int &WrongPin1, int _CardNumber)
 {
 	for (int i = 0; i < ClientCount; i++)
@@ -28,15 +27,15 @@ bool ProcCenter::ClientFind(string &name1, string &surname1, string &patronymic1
 	if (name1 == "") { return false; }
 	return true;
 }
-bool ProcCenter::GetCardBlock()
-{
-	return CardBlock;
-}
-
-int ProcCenter::GetSum()
-{
-	return *ClientSum;
-}
+//bool ProcCenter::GetCardBlock()
+//{
+//	return CardBlock;
+//}
+//
+//int ProcCenter::GetSum()
+//{
+//	return *ClientSum;
+//}
 
 string ProcCenter::GetFileName()
 {
@@ -44,10 +43,10 @@ string ProcCenter::GetFileName()
 }
 
 
-int ProcCenter::GetClientCount()
-{
-	return ClientCount;
-}
+//int ProcCenter::GetClientCount()
+//{
+//	return ClientCount;
+//}
 
 void ProcCenter::ChangeDate(int _CardNumber, int _ClientSum)
 {

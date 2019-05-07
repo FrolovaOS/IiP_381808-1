@@ -110,7 +110,7 @@ int Bankomat::GetCardBlock()
 {
 	return Client.CardBlock;
 }
-
+//исправить
 int Bankomat::getCard(int _CardNumber)
 {
 	Client.CardNumber = _CardNumber;

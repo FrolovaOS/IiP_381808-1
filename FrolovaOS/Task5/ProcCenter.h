@@ -23,10 +23,10 @@ public:
 	
 	ProcCenter(string fileName);
 	bool ClientFind(string &name1, string &surname1, string &patronymic1, int &ClientSum, int &ClientPin, bool &CardBlock, int &WrongPin, int _CardNumber);
-	bool GetCardBlock();
-	int GetSum();
+	//bool GetCardBlock();
+	//int GetSum();
 	string GetFileName();
-	int GetClientCount();
+	//int GetClientCount();
 	void ChangeDate(int _CardNumber, int _ClientSum);//write new file with changes
 
 	friend istream &operator >> (istream &fileName, ProcCenter &c);//overloaded input operator
